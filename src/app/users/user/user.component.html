@@ -1,6 +1,6 @@
 <div>
   <!-- "'/users/' + user().id"  This works too in router link prop binding-->
-  <a [routerLink]="['/users', user().id]" routerLinkActive="selected">
+  <a [routerLink]="['/users', user().id, 'tasks']" routerLinkActive="selected">
     <img [src]="imagePath()" [alt]="user().name" />
     <span>{{ user().name }}</span>
   </a>
