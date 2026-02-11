@@ -24,6 +24,11 @@ export class UserTasksComponent implements OnInit {
     console.log('Message', this.message());
     console.log('User Name', this.userName());
     console.log(this.activatedRoute);
+    this.activatedRoute.data.subscribe({
+      next: (data)=> {
+      console.log(data);
+      }
+    })
   //   console.log(this.activatedRoute.snapshot.paramMap.get('userId')); //not re executed
   //   const sub = this.activatedRoute.paramMap.subscribe({
   //     next: (paramMap)=> {
@@ -42,4 +47,9 @@ export const resolveUserName: ResolveFn<string> = (activatedRoute:ActivatedRoute
     const userService = inject(UsersService);
     const userName = userService.users.find(x => x.id === activatedRoute.paramMap.get('userId'))?.name || '';
     return userName;
+}
+
+export const resolveTitle: ResolveFn<string> = (activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot)=> {
+
+  return resolveUserName(activatedRoute,routerState) + '\' Tasks';
 }

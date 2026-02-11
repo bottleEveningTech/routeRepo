@@ -7,7 +7,8 @@ import { routes as userRoutes } from "./users/user-routes";
 export const routes: Routes = [
     {
         path: '', //your domain localhost:4200/
-        component: NoTaskComponent
+        component: NoTaskComponent,
+        title: 'No task selected'
     },
     {
         path: 'users/:userId', //your-domain//users/<uid>
@@ -18,7 +19,8 @@ export const routes: Routes = [
         },
         resolve: {
             userName: resolveUserName
-        }
+        },
+
     },
     {
         path: '**',
