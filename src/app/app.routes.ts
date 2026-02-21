@@ -1,8 +1,15 @@
-import { Routes } from "@angular/router";
+import { CanMatchFn, RedirectCommand, Router, Routes } from "@angular/router";
 import { NoTaskComponent } from "./tasks/no-task/no-task.component";
 import { resolveUserName, UserTasksComponent } from "./users/user-tasks/user-tasks.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { routes as userRoutes } from "./users/user-routes";
+import { inject } from "@angular/core";
+
+const dummyCanMatch: CanMatchFn = (route, segments) => {
+    const url = inject(Router)
+    const shouldAccess = Math.random()
+    return (shouldAccess < 0.5)? true : new RedirectCommand(url.parseUrl('/unauthorized'))
+}
 
 export const routes: Routes = [
     {
@@ -20,6 +27,7 @@ export const routes: Routes = [
         resolve: {
             userName: resolveUserName
         },
+        canMatch: [dummyCanMatch]
 
     },
     {
