@@ -16,7 +16,7 @@ export const routes: Routes = [
     resolve: {
       userTasks: resolveUserTasks,
     },
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    runGuardsAndResolvers: 'always',
     title: resolveTitle
   },
   {
